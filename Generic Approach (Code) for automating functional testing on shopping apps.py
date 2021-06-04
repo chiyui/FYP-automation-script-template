@@ -160,16 +160,16 @@ def RandomProductCheckOut():
         print('Random Clicking According to the assigned No. Begin')
 
 
-        # Expect the itesm are all not shown in a page, so a scrolling logic shoould be applied
+        # Expect the itesm are all not shown in a page, so a scrolling logic should be applied
         while True:
             searchRmdMatchSinglePage(randomProducts)
             time.sleep(2)
             # Scroll Logic
             time.sleep(2)
-            print('Scroll to find the remaining random match for odd checking')
-            if len(randomedHomeName) == 0:
+            print('Scroll to find the remaining products for picking')
+            if len(randomedProducts) == 0:
                 break
-                print('finished odd checking, break the while loop.')
+                print('finished random products clicking, break the while loop.')
 
     # Otherwise, click all products (applied to small products)
     elif len(TotalProducts) < int(ProductAmount):

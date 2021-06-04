@@ -166,10 +166,10 @@ def RandomProductCheckOut():
             time.sleep(2)
             # Scroll Logic
             time.sleep(2)
-            logger.info('Scroll to find the remaining random match for odd checking')
+            print('Scroll to find the remaining random match for odd checking')
             if len(randomedHomeName) == 0:
                 break
-                logger.info('finished odd checking, break the while loop.')
+                print('finished odd checking, break the while loop.')
 
     # Otherwise, click all products (applied to small products)
     elif len(TotalProducts) < int(ProductAmount):

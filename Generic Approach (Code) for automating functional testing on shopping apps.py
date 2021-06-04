@@ -15,6 +15,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException
 import io
 import sys, getopt
+import random
 
 
 def StartShoppingApp():
@@ -78,7 +79,8 @@ def ShoppingCart():
 
     """
 
-    # 1
+    # 1 - 2, 4 - 5
+    # change the number in range () to modify the quantity
     try:
         for _ in range(5):
             ShoppingCartBtn = NewFindID('xxxx').click()
@@ -86,6 +88,35 @@ def ShoppingCart():
     except NoSuchElementException:
         print('Retry to click again.')
         time.sleep(1)
+
+    # 3
+    # Randomly Click multiple items
+
+    # Logic about capturing all items
+    TotalList = []
+
+    # Assign a Item Amount that you want to click
+    ItemAmount = 999
+
+
+    Items = NewFindIDs('XXXX')
+    for element in Items:
+        TotalList.append(element.text)
+
+    # Logic about randomly pick some items
+    randomList = random.sample(TotalList, int(ItemAmount))
+    def ClickRandomItem(randomList):
+        AllItems = NewFindIDs('XXXX')
+        print('Start to Click into each items.')
+        for element in AllItems:
+            if element.text in randomList:
+                element.click()
+                # Scrolldown()
+                time.sleep(2)
+                # aosbs.driver.back()
+                print('product being clicked' + str(element.text))
+                randomList.remove(element.text)
+                print('Finished one random item clicking')
 
 def RandomProductCheckOut():
     """
@@ -95,3 +126,110 @@ def RandomProductCheckOut():
     It should be the most common use cases that users will encounter so it must be tested.
 
     """
+    TotalProducts = []
+
+    # Assign a Product Amount that you want to click
+    ProductAmount = 999
+
+    Products = NewFindIDs('XXXX')
+
+    for element in Products:
+        TotalProducts.append(element.text)
+
+    randomProducts = random.sample(TotalProducts, int(ProductAmount))
+
+    def ClickRandomProducts(randomProducts):
+        AllItems = NewFindIDs('XXXX')
+        print('Start to Click into each items.')
+        for element in AllItems:
+            if element.text in randomList:
+                element.click()
+                # Scrolldown()
+                time.sleep(2)
+                # aosbs.driver.back()
+                print('product being clicked' + str(element.text))
+                randomList.remove(element.text)
+                print('Finished one random item clicking')
+
+    # Randomly click products for enough ProductAmount randomly
+    if len(TotalProducts) > int(ProductAmount) or len(TotalProducts) == int(ProductAmount):
+        finalyrandomproducts = random.sample(TotalProducts, int(ProductAmount))
+        for element in finalyrandomproducts:
+            print('Random Product are Name is: ' + str(element))
+
+        print('Random Clicking According to the assigned No. Begin')
+
+
+        # Expect the itesm are all not shown in a page, so a scrolling logic shoould be applied
+        while True:
+            searchRmdMatchSinglePage(randomProducts)
+            time.sleep(2)
+            # Scroll Logic
+            time.sleep(2)
+            logger.info('Scroll to find the remaining random match for odd checking')
+            if len(randomedHomeName) == 0:
+                break
+                logger.info('finished odd checking, break the while loop.')
+
+    # Otherwise, click all products (applied to small products)
+    elif len(TotalProducts) < int(ProductAmount):
+        print('Current amount does not support random checking, conduct full checking now.')
+        pass
+
+    def CheckOutFlow():
+
+        # strategies what would be used
+
+        NewFindID('XX').click()
+        # This is alternative of the above Click XY:
+        # NewFindID('XXXX').click()
+
+        ClickXY('xx', 'xx')
+
+def CheckingOrderHistory():
+
+    """
+
+    Customer concerns if their orders is failed or not. Therefore, the code development on checking order history is essential.
+
+    Illustrative code
+    """
+
+    def checkingFlow(recordBtn):
+        recordBtn.click()
+        time.sleep(1)
+
+        # most of the situations that can apply to this LinearLayout
+        recordBtn = FindClasses('android.widget.LinearLayout')
+        recordBtn[0].click()
+        # Back to last page
+        aosbs.driver.back()
+        time.sleep(2)
+        recordBtn[1].click()
+        print('Turned to next order')
+        time.sleep(2)
+        print('Finished Info Checking and Odd Checking')
+        time.sleep(1)
+
+        # until reocrdBtn[Max.]
+
+def ExceptionHandling():
+    """
+
+    During the development, two exceptions are often occurs, which are “No such element exception” and “Session not found exception”.
+    The former refers to the element cannot be located while
+    the later refers to the lose of connection with the mobile application that tester are testing.
+
+    """
+
+    # Try Catch Framework
+
+    for _ in range(5):
+        try:
+            Elemntthatyouwant = NewFindID('XXXXXX')
+            break
+        except NoSuchElementException:
+            print('Retry to find the element.')
+            time.sleep(1)
+
+    # Session Suspended
